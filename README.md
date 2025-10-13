@@ -19,3 +19,8 @@ Se puede eliminar un curso
 
 /course-panel (modal de creación de curso)
 Se puede crear un nuevo curso
+
+# Pruebas unitarias
+
+- Se utiliza vitest
+dos test por componente
