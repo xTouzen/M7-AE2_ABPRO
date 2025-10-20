@@ -1,60 +1,15 @@
-<template>
-  <form @submit.prevent="handleSubmit">
-    <div v-if="errorMsg" class="alert alert-danger" role="alert">
-      {{ errorMsg }}
-    </div>
-
-    <div class="mb-3">
-      <label for="email" class="form-label">Correo Electrónico</label>
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="tu@correo.com"
-          v-model="email"
-          required
-          autocomplete="email"
-        />
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <label for="password" class="form-label">Contraseña</label>
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Tu contraseña"
-          v-model="password"
-          required
-          autocomplete="current-password"
-        />
-      </div>
-    </div>
-
-    <div class="d-grid">
-      <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-    </div>
-
-    <div class="text-center mt-4">
-      <router-link to="/create-user">¿No tienes una cuenta?</router-link>
-    </div>
-  </form>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
 const errorMsg = ref('');
+const showPassword = ref(false); 
 
 const userStore = useUserStore();
+const router = useRouter();
 
 const handleSubmit = async () => {
   errorMsg.value = '';
@@ -68,13 +23,70 @@ const handleSubmit = async () => {
 
   if (error) {
     errorMsg.value = error;
+  } else {
+    router.push({ name: 'course-panel' });
   }
 };
 </script>
 
-<style scoped>
-.input-group-text {
-  background-color: #f8f9fa;
-}
-</style>
+<template>
+  <v-card class="elevation-12 pa-4">
+    <v-card-title class="text-center text-h5 mb-4">
+      Iniciar Sesión
+    </v-card-title>
+
+    <v-card-text>
+      <v-form @submit.prevent="handleSubmit">
+        <v-alert
+          v-if="errorMsg"
+          type="error"
+          variant="tonal"
+          density="compact"
+          class="mb-4"
+        >
+          {{ errorMsg }}
+        </v-alert>
+
+        <v-text-field
+          v-model="email"
+          label="Correo Electrónico"
+          prepend-inner-icon="mdi-email-outline"
+          variant="outlined"
+          density="compact"
+          required
+          autocomplete="email"
+          class="mb-2"
+        ></v-text-field>
+
+        <v-text-field
+          v-model="password"
+          label="Contraseña"
+          :type="showPassword ? 'text' : 'password'"
+          prepend-inner-icon="mdi-lock-outline"
+          :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="showPassword = !showPassword"
+          variant="outlined"
+          density="compact"
+          required
+          autocomplete="current-password"
+        ></v-text-field>
+
+        <v-btn
+          type="submit"
+          color="primary"
+          block
+          class="mt-4"
+        >
+          Ingresar
+        </v-btn>
+      </v-form>
+    </v-card-text>
+
+    <v-card-actions class="justify-center">
+      <router-link to="/create-user" class="text-primary text-decoration-none">
+        ¿No tienes una cuenta?
+      </router-link>
+    </v-card-actions>
+  </v-card>
+</template>
 

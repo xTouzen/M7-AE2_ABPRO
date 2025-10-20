@@ -6,50 +6,50 @@ defineProps({
   }
 });
 
-const emit = defineEmits(['edit-course', 'delete-course']);
+const formattedPrice = (price) => {
+  return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(price);
+};
 </script>
 
 <template>
-  <div class="card h-100 shadow-sm">
-    <img :src="course.imageUrl" class="card-img-top" :alt="course.name" style="height: 200px; object-fit: cover;">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title">{{ course.name }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{ course.code }}</h6>
-      
-      <div class="my-2">
-        <span class="badge bg-primary me-2">
-          <i class="bi bi-people-fill"></i> {{ course.enrolledCount }} / {{ course.capacity }}
-        </span>
-      </div>
-      
-      <div class="d-flex justify-content-between align-items-center text-muted small">
-        <span><i class="bi bi-clock"></i> {{ course.duration }}</span>
-        <span class="fw-bold fs-5 text-success">${{ new Intl.NumberFormat('es-CL').format(course.price) }}</span>
+  <v-card class="h-100 d-flex flex-column">
+    <v-img
+      :src="course.imageUrl"
+      :alt="course.name"
+      height="200px"
+      cover
+    ></v-img>
+
+    <v-card-item>
+      <v-card-title>{{ course.name }}</v-card-title>
+      <v-card-subtitle>{{ course.code }}</v-card-subtitle>
+    </v-card-item>
+
+    <v-card-text class="flex-grow-1">
+      <div class="mb-3">
+        <v-chip
+          color="primary"
+          size="small"
+          prepend-icon="mdi-account-group"
+          class="me-2"
+        >
+          {{ course.enrolledCount }} / {{ course.capacity }}
+        </v-chip>
       </div>
 
-      <p class="card-text mt-3 flex-grow-1">{{ course.description }}</p>
-
-      <div class="mt-auto pt-2">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-warning btn-sm" type="button" @click="emit('edit-course', course)">
-            <i class="bi bi-pencil-fill"></i> Editar
-          </button>
-          <button class="btn btn-danger btn-sm" type="button" @click="emit('delete-course', course)">
-            <i class="bi bi-trash-fill"></i> Eliminar
-          </button>
+      <div class="d-flex justify-space-between align-center text-grey-darken-1 mb-3">
+        <div class="d-flex align-center text-caption">
+          <v-icon start icon="mdi-clock-outline"></v-icon>
+          {{ course.duration }}
+        </div>
+        <div class="text-h6 text-success font-weight-bold">
+          {{ formattedPrice(course.price) }}
         </div>
       </div>
-    </div>
-  </div>
+      
+      <p class="text-body-2">{{ course.description }}</p>
+    </v-card-text>
+    
+  </v-card>
 </template>
-
-<style scoped>
-.card-title {
-  font-weight: bold;
-}
-.card:hover {
-  transform: translateY(-5px);
-  transition: all 0.2s ease-in-out;
-}
-</style>
 

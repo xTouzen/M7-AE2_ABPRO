@@ -26,7 +26,6 @@ watch(() => props.initialData, (newData) => {
   }
 }, { immediate: true }); 
 
-const formTitle = computed(() => isEditMode.value ? 'Editar Curso' : 'Crear Nuevo Curso');
 const submitButtonText = computed(() => isEditMode.value ? 'Guardar Cambios' : 'Crear Curso');
 
 const handleSubmit = async () => {
@@ -50,47 +49,109 @@ const handleCancel = () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="courseName" class="form-label">Nombre del Curso</label>
-        <input type="text" class="form-control" id="courseName" v-model="courseData.name" required>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label for="courseCode" class="form-label">Código</label>
-        <input type="text" class="form-control" id="courseCode" v-model="courseData.code" required>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="courseImageUrl" class="form-label">URL de la Imagen</label>
-      <input type="text" class="form-control" id="courseImageUrl" v-model="courseData.imageUrl" placeholder="https://ejemplo.com/imagen.png">
-    </div>
-    <div class="row">
-      <div class="col-md-3 mb-3">
-        <label for="courseCapacity" class="form-label">Cupos</label>
-        <input type="number" class="form-control" id="courseCapacity" v-model.number="courseData.capacity">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="courseEnrolled" class="form-label">Inscritos</label>
-        <input type="number" class="form-control" id="courseEnrolled" v-model.number="courseData.enrolledCount">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="courseDuration" class="form-label">Duración</label>
-        <input type="text" class="form-control" id="courseDuration" v-model="courseData.duration">
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="coursePrice" class="form-label">Costo</label>
-        <input type="number" class="form-control" id="coursePrice" v-model.number="courseData.price">
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="courseDescription" class="form-label">Descripción</label>
-      <textarea class="form-control" id="courseDescription" rows="3" v-model="courseData.description"></textarea>
-    </div>
-    <div class="d-flex justify-content-end gap-2 mt-4">
-      <button type="button" class="btn btn-secondary" @click="handleCancel">Cancelar</button>
-      <button type="submit" class="btn btn-primary">{{ submitButtonText }}</button>
-    </div>
-  </form>
+  <v-form @submit.prevent="handleSubmit">
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model="courseData.name"
+            label="Nombre del Curso"
+            variant="outlined"
+            density="compact"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model="courseData.code"
+            label="Código"
+            variant="outlined"
+            density="compact"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12">
+          <v-text-field
+            v-model="courseData.imageUrl"
+            label="URL de la Imagen"
+            variant="outlined"
+            density="compact"
+            prepend-inner-icon="mdi-image"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="6" md="3">
+          <v-text-field
+            v-model.number="courseData.capacity"
+            label="Cupos"
+            type="number"
+            variant="outlined"
+            density="compact"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="6" md="3">
+          <v-text-field
+            v-model.number="courseData.enrolledCount"
+            label="Inscritos"
+            type="number"
+            variant="outlined"
+            density="compact"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="6" md="3">
+          <v-text-field
+            v-model="courseData.duration"
+            label="Duración"
+            variant="outlined"
+            density="compact"
+            prepend-inner-icon="mdi-clock-outline"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="6" md="3">
+          <v-text-field
+            v-model.number="courseData.price"
+            label="Costo"
+            type="number"
+            variant="outlined"
+            density="compact"
+            prefix="$"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12">
+          <v-textarea
+            v-model="courseData.description"
+            label="Descripción"
+            variant="outlined"
+            rows="3"
+            auto-grow
+          ></v-textarea>
+        </v-col>
+      </v-row>
+      
+      <v-row>
+        <v-col class="d-flex justify-end gap-2">
+          <v-btn
+            variant="text"
+            @click="handleCancel"
+          >
+            Cancelar
+          </v-btn>
+          <v-btn
+            type="submit"
+            color="primary"
+            variant="flat"
+          >
+            {{ submitButtonText }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
 </template>
 

@@ -1,25 +1,13 @@
 <script setup>
-import CreateUserForm from '@/components/CreateUserForm.vue';
+import CreateUserForm from '@/components/CreateUserForm.vue'
 </script>
 
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5">
-        <div class="card shadow-sm">
-          <div class="card-body p-4 p-md-5">
-            <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
-            <CreateUserForm />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container class="fill-height">
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="8" md="6" lg="4">
+        <CreateUserForm />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
-
-<style scoped>
-.container {
-  min-height: 80vh;
-  align-items: center;
-}
-</style>

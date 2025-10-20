@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import CreateUserView from '@/views/CreateUserView.vue'
 import CoursePanelView from '@/views/CoursePanelView.vue'
+import CoursePanelAdminView from '@/views/CoursePanelAdminView.vue'
 import { useUserStore } from '../stores/user'
 import { auth } from '../fireBaseConfig'
 
@@ -27,6 +28,12 @@ const router = createRouter({
       name: 'course-panel',
       component: CoursePanelView,
       meta: { requireAuth: true },
+    },
+    {
+      path: '/course-admin',
+      name: 'course-admin',
+      component: CoursePanelAdminView,
+      meta: { requiresAuth: true }
     }
 
   ],
