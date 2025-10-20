@@ -1,38 +1,26 @@
 # M7-AE2_ABPRO
 
-This template should help get you started developing with Vue 3 in Vite.
+- Se configura Authentication con Firebase
+- Se configura base de datos con Firestore
+- Se utiliza Bootstrap
 
-## Recommended IDE Setup
+/login
+Cuentas alojadas en Firebase
+test@correo.com (11112222)
+test2@correo.com (11112222)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+/create-user
+Crea una cuenta 
 
-## Recommended Browser Setup
+/course-panel
+Visualizador de cursos
+Se puede editar un curso
+Se puede eliminar un curso
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+/course-panel (modal de creación de curso)
+Se puede crear un nuevo curso
 
-## Customize configuration
+# Pruebas unitarias
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+- Se utiliza vitest
+dos test por componente
