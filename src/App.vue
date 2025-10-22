@@ -3,8 +3,6 @@ import { onMounted } from 'vue';
 import { useUserStore } from './stores/user';
 import { useRouter } from 'vue-router';
 
-// Esta línea es la que probablemente faltaba.
-// Inicializa el store para que pueda ser usado en el template.
 const userStore = useUserStore();
 const router = useRouter();
 
@@ -14,7 +12,7 @@ onMounted(() => {
 
 const handleLogout = async () => {
   await userStore.logoutUser();
-  router.push({ name: 'login' });
+  router.push({ name: 'login' }); 
 };
 
 const goToPanel = () => {
@@ -44,9 +42,9 @@ const goToPanel = () => {
             Bienvenido, {{ userStore.userData.email }}
           </span>
         </div>
-        
-        <!-- Botón para ir al Panel de Administración -->
+
         <v-btn
+          v-if="userStore.isAdmin" 
           :to="{ name: 'course-admin' }"
           variant="text"
           size="small"
